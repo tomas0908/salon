@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+<!-- =======================
+     SEO: назва, опис, соцмережі
+     Тут можна змінити текст під ваш салон
+     ======================= -->
+<title>AURELIA — салон краси преміум-класу | Запис онлайн</title>
+<meta name="description" content="AURELIA — салон краси преміум-класу. Манікюр, педикюр, стрижки, фарбування, макіяж та косметологія. Найкращі майстри, дорога атмосфера, миттєвий онлайн-запис.">
+<meta name="keywords" content="салон краси, манікюр, педикюр, стрижка, фарбування, макіяж, косметологія, beauty salon">
+<meta name="author" content="AURELIA Beauty Salon">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="AURELIA — салон краси преміум-класу">
+<meta property="og:description" content="Довірте свою красу професіоналам. Запис онлайн за 1 хвилину.">
+<meta property="og:image" content="og-cover.jpg">
+<meta property="og:locale" content="uk_UA">
+
+<!-- Favicon: замініть файл favicon.svg на свій логотип -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23C7A86B'/%3E%3Ctext x='50' y='63' font-size='50' text-anchor='middle' fill='white' font-family='serif'%3EA%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts: Playfair Display (заголовки) + Jost (текст) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome (іконки) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- AOS (анімації появи блоків при скролі) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<!-- Swiper (слайдери галереї та відгуків) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+
+<!-- schema.org: розмітка організації для пошукових систем -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "AURELIA",
+  "image": "hero.jpg",
+  "telephone": "+380671234567",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "вул. Прикладна, 1",
+    "addressLocality": "Дніпро",
+    "addressCountry": "UA"
+  }
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- =======================
+     ПРЕЛОАДЕР
+     Показується поки завантажується сторінка
+     Тут можна змінити анімацію завантаження
+     ======================= -->
+<div class="preloader" id="preloader">
+  <div class="preloader__logo">AURELIA</div>
+  <div class="preloader__line"></div>
+</div>
+
+<!-- =======================
+     Кнопка "Записатися" — плаваюча (мобільна версія)
+     Завжди видима внизу екрану на телефонах
+     ======================= -->
+<a href="#booking" class="floating-cta" aria-label="Записатися онлайн">
+  <i class="fa-solid fa-calendar-check"></i>
+  <span>Записатися</span>
+</a>
+
+<!-- =======================
+     ШАПКА САЙТУ / МЕНЮ (Header + Navigation)
+     Тут знаходиться логотип, меню та кнопка "Записатися"
+     Стає "скляною" (glass) при скролі — дивись script.js
+     ======================= -->
+<header class="header" id="header">
+  <div class="container header__inner">
+
+    <!-- Логотип: замініть текст або вставте свій SVG/зображення -->
+    <a href="#hero" class="logo">
+      <span class="logo__mark">A</span>
+      <span class="logo__text">AURELIA</span>
+    </a>
+
+    <!-- Головне меню (десктоп) -->
+    <nav class="nav" id="nav">
+      <a href="#advantages" class="nav__link">Переваги</a>
+      <a href="#services" class="nav__link">Послуги</a>
+      <a href="#gallery" class="nav__link">Галерея</a>
+      <a href="#masters" class="nav__link">Майстри</a>
+      <a href="#reviews" class="nav__link">Відгуки</a>
+      <a href="#faq" class="nav__link">FAQ</a>
+      <a href="#contacts" class="nav__link">Контакти</a>
+    </nav>
+
+    <!-- Телефон + кнопка запису у шапці -->
+    <div class="header__actions">
+      <a href="tel:+380671234567" class="header__phone">
+        <i class="fa-solid fa-phone"></i> +38 (067) 123-45-67
+      </a>
+      <a href="#booking" class="btn btn--gold">Записатися</a>
+    </div>
+
+    <!-- Кнопка бургер-меню (мобільна версія) -->
+    <button class="burger" id="burger" aria-label="Відкрити меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Мобільне меню -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#advantages" class="mobile-menu__link">Переваги</a>
+    <a href="#services" class="mobile-menu__link">Послуги</a>
+    <a href="#gallery" class="mobile-menu__link">Галерея</a>
+    <a href="#masters" class="mobile-menu__link">Майстри</a>
+    <a href="#reviews" class="mobile-menu__link">Відгуки</a>
+    <a href="#faq" class="mobile-menu__link">FAQ</a>
+    <a href="#contacts" class="mobile-menu__link">Контакти</a>
+    <a href="tel:+380671234567" class="mobile-menu__phone"><i class="fa-solid fa-phone"></i> +38 (067) 123-45-67</a>
+    <a href="#booking" class="btn btn--gold mobile-menu__cta">Записатися</a>
+  </div>
+</header>
+
+
+<!-- =======================
+     1. HERO SECTION (Головний екран)
+     Тут змінюється головне фото — background-image класу .hero у style.css
+     Рекомендований розмір фото: 1920×1080, файл hero.jpg
+     Тут знаходиться головний заголовок і кнопка запису
+     ======================= -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+
+  <!-- Декоративна золота лінія-підпис (фірмовий елемент дизайну) -->
+  <svg class="hero__signature" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C120,10 180,55 300,30 C420,5 480,50 600,20" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <div class="container hero__content" data-aos="fade-up" data-aos-duration="900">
+    <p class="eyebrow">Салон краси преміум-класу · Дніпро</p>
+    <h1 class="hero__title">
+      Краса, що <span class="italic">говорить</span><br> без слів
+    </h1>
+    <p class="hero__subtitle">
+      Індивідуальний підхід, преміальна косметика та майстри вищої категорії.
+      Ми створюємо не просто образ — ми створюємо враження, яке залишається з вами.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#booking" class="btn btn--gold btn--lg">
+        Записатися <i class="fa-solid fa-arrow-right-long"></i>
+      </a>
+      <a href="#services" class="btn btn--ghost btn--lg">Наші послуги</a>
+    </div>
+
+    <!-- Міні-статистика довіри -->
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-count="12">0</span><span class="hero__stat-plus">+</span>
+        <span class="hero__stat-label">років досвіду</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-count="8500">0</span><span class="hero__stat-plus">+</span>
+        <span class="hero__stat-label">задоволених клієнтів</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-count="14">0</span>
+        <span class="hero__stat-label">майстрів вищої категорії</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Індикатор скролу вниз -->
+  <a href="#advantages" class="hero__scroll" aria-label="Гортати далі">
+    <span></span>
+  </a>
+</section>
+
+
+<!-- =======================
+     2. ПЕРЕВАГИ (Чому саме ми)
+     Кожна картка: іконка + заголовок + короткий текст
+     Іконки можна замінити на будь-які з Font Awesome (fontawesome.com)
+     ======================= -->
+<section class="section advantages" id="advantages">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Наші переваги</p>
+      <h2 class="section__title">Чому клієнти обирають AURELIA</h2>
+    </div>
+
+    <div class="advantages__grid">
+
+      <div class="advantage-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="advantage-card__icon"><i class="fa-solid fa-gem"></i></div>
+        <h3>Преміальна косметика</h3>
+        <p>Працюємо тільки з сертифікованими брендами світового рівня — без компромісів у якості.</p>
+      </div>
+
+      <div class="advantage-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="advantage-card__icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <h3>Майстри вищої категорії</h3>
+        <p>Кожен спеціаліст проходить щорічне стажування та підтверджує кваліфікацію.</p>
+      </div>
+
+      <div class="advantage-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="advantage-card__icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <h3>Стерильність і безпека</h3>
+        <p>Повна дезінфекція та стерилізація інструментів після кожного клієнта.</p>
+      </div>
+
+      <div class="advantage-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="advantage-card__icon"><i class="fa-solid fa-clock"></i></div>
+        <h3>Запис за хвилину</h3>
+        <p>Онлайн-запис 24/7 без дзвінків та очікування — оберіть зручний час у пару кліків.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     3. НАШІ ПОСЛУГИ
+     Картки послуг: фото, назва, ціна "від", кнопка "Детальніше"
+     Замініть посилання href="#" на реальні сторінки послуг
+     ======================= -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Послуги</p>
+      <h2 class="section__title">Все для вашої досконалості</h2>
+      <p class="section__desc">Повний спектр beauty-послуг в одному просторі — від класичного манікюру до професійної косметології.</p>
+    </div>
+
+    <div class="services__grid">
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="service-card__img service-card__img--1"></div>
+        <div class="service-card__body">
+          <h3>Манікюр</h3>
+          <p>Гель-лак, дизайн, догляд за кутикулою та зміцнення нігтя.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 600 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="service-card__img service-card__img--2"></div>
+        <div class="service-card__body">
+          <h3>Педикюр</h3>
+          <p>Апаратний та класичний педикюр з естетичним фінішем.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 750 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="service-card__img service-card__img--3"></div>
+        <div class="service-card__body">
+          <h3>Фарбування</h3>
+          <p>Балаяж, омбре, тонування — індивідуальний підбір відтінку.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 1800 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="service-card__img service-card__img--4"></div>
+        <div class="service-card__body">
+          <h3>Стрижки</h3>
+          <p>Жіночі, чоловічі та дитячі стрижки будь-якої складності.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 900 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="service-card__img service-card__img--5"></div>
+        <div class="service-card__body">
+          <h3>Макіяж</h3>
+          <p>Денний, вечірній та весільний макіяж преміальною косметикою.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 1200 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="service-card__img service-card__img--6"></div>
+        <div class="service-card__body">
+          <h3>Косметологія</h3>
+          <p>Чистка обличчя, пілінги та апаратні процедури догляду.</p>
+          <div class="service-card__footer">
+            <span class="service-card__price">від 1500 грн</span>
+            <a href="#booking" class="service-card__link">Детальніше <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     4. ГАЛЕРЕЯ РОБІТ
+     Слайдер на Swiper.js — фото робіт майстрів
+     Замініть класи service-card__img на background-image ваших фото
+     ======================= -->
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Галерея</p>
+      <h2 class="section__title">Наші роботи</h2>
+    </div>
+  </div>
+
+  <!-- Слайдер на всю ширину екрану -->
+  <div class="swiper gallery__slider" data-aos="fade-up">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="gallery__item gallery__item--1"></div></div>
+      <div class="swiper-slide"><div class="gallery__item gallery__item--2"></div></div>
+      <div class="swiper-slide"><div class="gallery__item gallery__item--3"></div></div>
+      <div class="swiper-slide"><div class="gallery__item gallery__item--4"></div></div>
+      <div class="swiper-slide"><div class="gallery__item gallery__item--5"></div></div>
+      <div class="swiper-slide"><div class="gallery__item gallery__item--6"></div></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <div class="gallery__nav container">
+    <button class="gallery__prev" aria-label="Попереднє фото"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="gallery__next" aria-label="Наступне фото"><i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</section>
+
+
+<!-- =======================
+     5. ДО / ПІСЛЯ
+     Слайдер-компаратор результатів роботи майстрів
+     Перетягніть повзунок, щоб порівняти два фото (керується у script.js)
+     ======================= -->
+<section class="section before-after" id="before-after">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Результат</p>
+      <h2 class="section__title">До / Після</h2>
+      <p class="section__desc">Перетягніть повзунок, щоб побачити різницю.</p>
+    </div>
+
+    <div class="ba-slider" data-aos="zoom-in">
+      <div class="ba-slider__before">
+        <span class="ba-slider__label ba-slider__label--before">До</span>
+      </div>
+      <div class="ba-slider__after">
+        <span class="ba-slider__label ba-slider__label--after">Після</span>
+      </div>
+      <input type="range" min="0" max="100" value="50" class="ba-slider__range" id="baRange" aria-label="Порівняти до і після">
+      <div class="ba-slider__handle" id="baHandle"><i class="fa-solid fa-arrows-left-right"></i></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     6. НАШІ МАЙСТРИ
+     Фото, ім'я, досвід, спеціалізація кожного майстра
+     ======================= -->
+<section class="section masters" id="masters">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Команда</p>
+      <h2 class="section__title">Наші майстри</h2>
+    </div>
+
+    <div class="masters__grid">
+
+      <div class="master-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="master-card__photo master-card__photo--1"></div>
+        <h3>Олена Ковальчук</h3>
+        <p class="master-card__spec">Топ-стиліст із фарбування</p>
+        <p class="master-card__exp">Досвід 9 років</p>
+      </div>
+
+      <div class="master-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="master-card__photo master-card__photo--2"></div>
+        <h3>Марія Дяченко</h3>
+        <p class="master-card__spec">Nail-майстер, дизайн нігтів</p>
+        <p class="master-card__exp">Досвід 6 років</p>
+      </div>
+
+      <div class="master-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="master-card__photo master-card__photo--3"></div>
+        <h3>Артем Мельник</h3>
+        <p class="master-card__spec">Барбер, чоловічі стрижки</p>
+        <p class="master-card__exp">Досвід 8 років</p>
+      </div>
+
+      <div class="master-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="master-card__photo master-card__photo--4"></div>
+        <h3>Ірина Савчук</h3>
+        <p class="master-card__spec">Косметолог-естетист</p>
+        <p class="master-card__exp">Досвід 11 років</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     7. ВІДГУКИ
+     Карусель на Swiper.js, зірки рейтингу, реалістичні тексти
+     ======================= -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Відгуки</p>
+      <h2 class="section__title">Що кажуть наші клієнтки</h2>
+    </div>
+
+    <div class="swiper reviews__slider" data-aos="fade-up">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p>«Вперше зайшла випадково, а тепер це мій постійний салон. Атмосфера дорога, майстри уважні до дрібниць, а манікюр тримається по три тижні без сколів».</p>
+            <div class="review-card__author">
+              <span class="review-card__name">Наталія П.</span>
+              <span class="review-card__date">2 тижні тому</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p>«Робила фарбування волосся — результат перевершив очікування. Приємно, що майстер спершу проконсультувала, а не просто фарбувала за шаблоном».</p>
+            <div class="review-card__author">
+              <span class="review-card__name">Юлія К.</span>
+              <span class="review-card__date">1 місяць тому</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p>«Косметолог підібрала процедуру саме під мою шкіру, а не за загальним прайсом. Записуюсь тепер щомісяця, ефект накопичувальний і справді видно».</p>
+            <div class="review-card__author">
+              <span class="review-card__name">Софія В.</span>
+              <span class="review-card__date">3 тижні тому</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p>«Онлайн-запис реально економить час — обрала майстра, час і вже за хвилину отримала підтвердження. Дуже зручно для зайнятих людей».</p>
+            <div class="review-card__author">
+              <span class="review-card__name">Анна Т.</span>
+              <span class="review-card__date">5 днів тому</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     8. АКЦІЯ (таймер зі знижкою)
+     Дата закінчення акції задається у script.js (змінна promoEndDate)
+     ======================= -->
+<section class="promo" id="promo">
+  <div class="container promo__inner" data-aos="zoom-in">
+    <div class="promo__text">
+      <p class="eyebrow">Обмежена пропозиція</p>
+      <h2>-20% на перший візит</h2>
+      <p class="promo__desc">Знижка діє на будь-яку послугу для нових клієнтів. Встигніть записатися до завершення акції.</p>
+      <a href="#booking" class="btn btn--white btn--lg">Забронювати зі знижкою</a>
+    </div>
+
+    <!-- Таймер зворотного відліку -->
+    <div class="promo__timer" id="promoTimer">
+      <div class="promo__timer-block"><span id="tDays">00</span><small>дні</small></div>
+      <div class="promo__timer-block"><span id="tHours">00</span><small>год</small></div>
+      <div class="promo__timer-block"><span id="tMinutes">00</span><small>хв</small></div>
+      <div class="promo__timer-block"><span id="tSeconds">00</span><small>сек</small></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     9. ПРО САЛОН
+     Коротка історія та причини довіри
+     Тут можна змінити фото на своє (клас about__img)
+     ======================= -->
+<section class="section about" id="about">
+  <div class="container about__inner">
+
+    <div class="about__img" data-aos="fade-right"></div>
+
+    <div class="about__content" data-aos="fade-left">
+      <p class="eyebrow">Про нас</p>
+      <h2 class="section__title">12 років турботи про вашу красу</h2>
+      <p>AURELIA відкрилась у 2014 році з ідеї — створити простір, де кожна деталь працює на відчуття спокою та довіри. Сьогодні це команда з 14 майстрів вищої категорії, які щодня вдосконалюють свою майстерність.</p>
+      <p>Ми не женемось за кількістю клієнтів — ми дбаємо про якість кожної процедури, від першої консультації до фінального результату.</p>
+
+      <ul class="about__list">
+        <li><i class="fa-solid fa-check"></i> Сертифіковані матеріали преміум-класу</li>
+        <li><i class="fa-solid fa-check"></i> Індивідуальний підбір процедур</li>
+        <li><i class="fa-solid fa-check"></i> Гарантія результату та повторна консультація</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =======================
+     10. FAQ (Часті запитання)
+     Акордеон — логіка розкриття у script.js
+     ======================= -->
+<section class="section faq" id="faq">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow eyebrow--center">Питання</p>
+      <h2 class="section__title">Часті запитання</h2>
+    </div>
+
+    <div class="accordion" data-aos="fade-up">
+
+      <div class="accordion__item">
+        <button class="accordion__header">
+          Як записатись на процедуру?
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="accordion__body">
+          <p>Заповніть форму у розділі «Записатися» або зателефонуйте нам — адміністратор підбере зручний час протягом кількох хвилин.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__header">
+          Чи можна скасувати або перенести запис?
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="accordion__body">
+          <p>Так, повідомте нас щонайменше за 3 години до візиту — перенесемо запис на зручний для вас час без додаткових умов.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__header">
+          Яка косметика використовується у процедурах?
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="accordion__body">
+          <p>Ми працюємо виключно із сертифікованою професійною косметикою провідних європейських брендів.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__header">
+          Чи є у вас акції для постійних клієнтів?
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="accordion__body">
+          <p>Так, діє програма лояльності з накопичувальними знижками та закритими пропозиціями у Instagram.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =======================
+     11. КОНТАКТИ + ФОРМА ЗАПИСУ
+     Тут змінюється номер телефону, адреса та посилання на карту
+     ======================= -->
+<section class="section booking" id="booking">
+  <div class="container booking__inner">
+
+    <div class="booking__form-wrap" data-aos="fade-right">
+      <p class="eyebrow">Запис онлайн</p>
+      <h2 class="section__title">Забронюйте свій час</h2>
+      <p class="section__desc">Заповніть форму — ми зателефонуємо для підтвердження запису протягом 15 хвилин.</p>
+
+      <!-- Форма запису: підключіть свій backend/сервіс до атрибута action -->
+      <form class="booking__form" id="bookingForm">
+        <div class="form__row">
+          <label class="form__field">
+            <span>Ім'я</span>
+            <input type="text" name="name" placeholder="Ваше ім'я" required>
+          </label>
+          <label class="form__field">
+            <span>Телефон</span>
+            <input type="tel" name="phone" placeholder="+38 (0__) ___-__-__" required>
+          </label>
+        </div>
+
+        <label class="form__field">
+          <span>Послуга</span>
+          <select name="service">
+            <option>Манікюр</option>
+            <option>Педикюр</option>
+            <option>Фарбування</option>
+            <option>Стрижка</option>
+            <option>Макіяж</option>
+            <option>Косметологія</option>
+          </select>
+        </label>
+
+        <label class="form__field">
+          <span>Коментар</span>
+          <textarea name="comment" placeholder="Побажання щодо запису (необов'язково)" rows="3"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--gold btn--lg btn--full">
+          Надіслати заявку <i class="fa-solid fa-paper-plane"></i>
+        </button>
+        <p class="form__note">Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних.</p>
+      </form>
+    </div>
+
+    <div class="booking__contacts" data-aos="fade-left">
+      <div class="contact-card">
+        <i class="fa-solid fa-phone"></i>
+        <div>
+          <span>Телефон</span>
+          <a href="tel:+380671234567">+38 (067) 123-45-67</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <i class="fa-brands fa-instagram"></i>
+        <div>
+          <span>Instagram</span>
+          <a href="https://instagram.com" target="_blank" rel="noopener">@aurelia.salon</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <i class="fa-brands fa-facebook"></i>
+        <div>
+          <span>Facebook</span>
+          <a href="https://facebook.com" target="_blank" rel="noopener">AURELIA Beauty</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <i class="fa-solid fa-location-dot"></i>
+        <div>
+          <span>Адреса</span>
+          <a href="https://www.google.com/maps" target="_blank" rel="noopener">м. Дніпро, вул. Прикладна, 1</a>
+        </div>
+      </div>
+
+      <!-- Кнопка побудувати маршрут -->
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Дніпро+вул.+Прикладна+1" target="_blank" rel="noopener" class="btn btn--dark btn--full">
+        <i class="fa-solid fa-diamond-turn-right"></i> Побудувати маршрут
+      </a>
+
+      <!-- Карта: вставте свій код Google Maps embed сюди -->
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=Дніпро&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Карта розташування салону AURELIA">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =======================
+     12. FOOTER (підвал сайту)
+     Повторення контактів, соцмережі, копірайт
+     ======================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+
+    <div class="footer__col">
+      <a href="#hero" class="logo logo--footer">
+        <span class="logo__mark">A</span>
+        <span class="logo__text">AURELIA</span>
+      </a>
+      <p>Салон краси преміум-класу у Дніпрі. Ваша краса — наша майстерність.</p>
+      <div class="footer__socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://t.me" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h4>Навігація</h4>
+      <a href="#services">Послуги</a>
+      <a href="#masters">Майстри</a>
+      <a href="#reviews">Відгуки</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Контакти</h4>
+      <a href="tel:+380671234567"><i class="fa-solid fa-phone"></i> +38 (067) 123-45-67</a>
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i> м. Дніпро, вул. Прикладна, 1</a>
+      <span><i class="fa-solid fa-clock"></i> Щодня 09:00–20:00</span>
+    </div>
+
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p>© <span id="year"></span> AURELIA. Усі права захищено.</p>
+      <p>Політика конфіденційності</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- =======================
+     Кнопка "Нагору"
+     ======================= -->
+<button class="to-top" id="toTop" aria-label="Прогорнути нагору">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+
+<!-- Підключення бібліотек -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
