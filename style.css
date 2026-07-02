@@ -1,0 +1,564 @@
+/* ===========================================
+   CSS ЗМІННІ (CSS Variables)
+   Тут можна змінити всю кольорову схему сайту одразу
+   =========================================== */
+:root{
+  --gold:#C7A86B;          /* основний золотий акцент */
+  --gold-light:#E4D4B0;    /* світло-золотий для градієнтів */
+  --gold-dark:#A98A4E;     /* темно-золотий для hover-станів */
+  --pink:#FCECEC;          /* ніжно-рожевий фон блоків */
+  --pink-deep:#F3D9DA;     /* насичений рожевий для акцентів */
+  --beige:#F7F3ED;         /* основний бежевий фон сайту */
+  --dark:#1E1B18;          /* майже чорний для тексту і темних блоків */
+  --white:#FFFFFF;
+  --gray:#7A7570;          /* сірий для другорядного тексту */
+
+  --font-display:'Playfair Display', serif;   /* шрифт заголовків */
+  --font-body:'Jost', sans-serif;              /* шрифт основного тексту */
+
+  --radius-sm:10px;
+  --radius-md:20px;
+  --radius-lg:32px;
+
+  --shadow-soft:0 20px 60px rgba(30,27,24,0.08);
+  --shadow-gold:0 15px 40px rgba(199,168,107,0.35);
+
+  --transition:0.4s cubic-bezier(0.65,0,0.35,1);
+  --container-w:1240px;
+}
+
+/* ===========================================
+   БАЗОВІ СКИДАННЯ СТИЛІВ
+   =========================================== */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:var(--font-body);
+  color:var(--dark);
+  background:var(--beige);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{ max-width:100%; display:block; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+input,textarea,select{ font-family:inherit; font-size:1rem; }
+h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
+
+/* Повага до налаштувань зменшеної анімації */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+
+/* Видимий фокус для клавіатурної навігації (доступність) */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline:2px solid var(--gold-dark);
+  outline-offset:3px;
+}
+
+.container{
+  max-width:var(--container-w);
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.italic{ font-style:italic; color:var(--gold-dark); }
+
+/* ===========================================
+   ТИПОГРАФІЧНІ ДОПОМІЖНІ КЛАСИ
+   =========================================== */
+.eyebrow{
+  font-family:var(--font-body);
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  font-size:0.75rem;
+  font-weight:600;
+  color:var(--gold-dark);
+  margin-bottom:14px;
+  display:inline-block;
+}
+.eyebrow--center{ display:block; text-align:center; }
+
+.section{ padding:110px 0; }
+.section__head{ max-width:640px; margin:0 auto 60px; text-align:center; }
+.section__title{ font-size:clamp(1.9rem,3.4vw,2.75rem); margin-bottom:16px; }
+.section__desc{ color:var(--gray); font-size:1.05rem; }
+
+/* ===========================================
+   КНОПКИ (з Ripple-ефектом, керується у script.js)
+   Тут можна змінити: колір, розмір, анімацію
+   =========================================== */
+.btn{
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:15px 30px;
+  border-radius:100px;
+  font-size:0.95rem;
+  font-weight:600;
+  letter-spacing:0.02em;
+  transition:transform var(--transition), box-shadow var(--transition), background var(--transition);
+  white-space:nowrap;
+}
+.btn:hover{ transform:translateY(-3px); }
+.btn--lg{ padding:18px 38px; font-size:1rem; }
+.btn--full{ width:100%; justify-content:center; }
+
+.btn--gold{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--dark);
+  box-shadow:var(--shadow-gold);
+}
+.btn--gold:hover{ box-shadow:0 20px 50px rgba(199,168,107,0.5); }
+
+.btn--ghost{
+  background:rgba(255,255,255,0.08);
+  color:var(--dark);
+  border:1.5px solid rgba(30,27,24,0.25);
+  backdrop-filter:blur(6px);
+}
+.btn--ghost:hover{ border-color:var(--gold-dark); color:var(--gold-dark); }
+
+.btn--white{ background:var(--white); color:var(--dark); }
+.btn--white:hover{ box-shadow:0 20px 45px rgba(0,0,0,0.25); }
+
+.btn--dark{ background:var(--dark); color:var(--white); }
+.btn--dark:hover{ box-shadow:0 20px 45px rgba(0,0,0,0.3); }
+
+/* Анімація хвилі при кліку (ripple), елемент .ripple додає script.js */
+.ripple{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,0.55);
+  transform:scale(0);
+  animation:rippleAnim 0.6s ease-out;
+  pointer-events:none;
+}
+@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
+
+/* ===========================================
+   ПРЕЛОАДЕР
+   =========================================== */
+.preloader{
+  position:fixed; inset:0; z-index:9999;
+  background:var(--dark);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+  transition:opacity 0.6s ease, visibility 0.6s ease;
+}
+.preloader.is-hidden{ opacity:0; visibility:hidden; }
+.preloader__logo{ font-family:var(--font-display); font-size:1.8rem; letter-spacing:0.15em; color:var(--gold-light); }
+.preloader__line{ width:120px; height:2px; background:rgba(255,255,255,0.15); position:relative; overflow:hidden; }
+.preloader__line::after{
+  content:''; position:absolute; left:-40%; top:0; bottom:0; width:40%;
+  background:var(--gold); animation:preloadMove 1s ease-in-out infinite;
+}
+@keyframes preloadMove{ 0%{left:-40%;} 100%{left:100%;} }
+
+/* ===========================================
+   ПЛАВАЮЧА КНОПКА "Записатися" (моб. версія)
+   =========================================== */
+.floating-cta{
+  position:fixed; right:20px; bottom:20px; z-index:400;
+  display:none; align-items:center; gap:8px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--dark); padding:14px 20px; border-radius:100px;
+  box-shadow:var(--shadow-gold); font-weight:600; font-size:0.9rem;
+}
+
+/* ===========================================
+   ШАПКА / НАВІГАЦІЯ (Header)
+   При скролі стає "скляною" — клас .header--scrolled додає script.js
+   =========================================== */
+.header{
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  padding:22px 0;
+  transition:background var(--transition), padding var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
+}
+.header--scrolled{
+  padding:14px 0;
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 10px 40px rgba(30,27,24,0.06);
+}
+.header__inner{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+
+.logo{ display:flex; align-items:center; gap:10px; }
+.logo__mark{
+  width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; color:var(--dark);
+}
+.logo__text{ font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.08em; font-weight:600; }
+
+.nav{ display:flex; gap:32px; }
+.nav__link{ font-size:0.92rem; font-weight:500; position:relative; padding-bottom:4px; }
+.nav__link::after{
+  content:''; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--gold-dark);
+  transition:width var(--transition);
+}
+.nav__link:hover::after{ width:100%; }
+
+.header__actions{ display:flex; align-items:center; gap:22px; }
+.header__phone{ font-size:0.9rem; font-weight:600; display:flex; align-items:center; gap:8px; }
+.header__phone i{ color:var(--gold-dark); }
+
+.burger{ display:none; flex-direction:column; gap:5px; width:28px; z-index:600; }
+.burger span{ height:2px; background:var(--dark); border-radius:2px; transition:var(--transition); }
+.burger.is-active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.burger.is-active span:nth-child(2){ opacity:0; }
+.burger.is-active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+.mobile-menu{
+  position:fixed; top:0; right:0; bottom:0; width:min(340px,85vw); z-index:550;
+  background:rgba(255,255,255,0.92); backdrop-filter:blur(20px);
+  display:flex; flex-direction:column; gap:22px; padding:110px 32px 40px;
+  transform:translateX(100%); transition:transform var(--transition);
+  box-shadow:-20px 0 60px rgba(0,0,0,0.1);
+}
+.mobile-menu.is-open{ transform:translateX(0); }
+.mobile-menu__link{ font-size:1.1rem; font-weight:500; }
+.mobile-menu__phone{ font-weight:600; display:flex; gap:8px; align-items:center; }
+.mobile-menu__cta{ margin-top:12px; }
+
+/* ===========================================
+   1. HERO SECTION
+   Тут вставляється головне фото (background класу .hero__bg)
+   Рекомендований розмір: 1920×1080, файл hero.jpg
+   =========================================== */
+.hero{
+  position:relative; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; overflow:hidden; padding:140px 0 80px;
+}
+.hero__bg{
+  position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(199,168,107,0.20), transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(243,217,218,0.55), transparent 55%),
+    linear-gradient(160deg,#FDFBF8 0%, var(--beige) 45%, var(--pink) 100%);
+  background-size:cover;
+}
+.hero__overlay{ position:absolute; inset:0; z-index:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.35), transparent 60%); }
+
+.hero__signature{ position:absolute; top:18%; left:0; width:100%; height:60px; opacity:0.5; z-index:1; }
+
+.hero__content{ position:relative; z-index:2; text-align:center; max-width:820px; }
+.hero__title{ font-size:clamp(2.6rem,6vw,4.6rem); margin-bottom:22px; letter-spacing:-0.01em; }
+.hero__subtitle{ font-size:1.15rem; color:var(--gray); max-width:600px; margin:0 auto 40px; }
+.hero__actions{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:70px; }
+
+.hero__stats{ display:flex; justify-content:center; gap:56px; flex-wrap:wrap; }
+.hero__stat{ display:flex; flex-direction:column; align-items:center; }
+.hero__stat-num{ font-family:var(--font-display); font-size:2.2rem; font-weight:700; color:var(--gold-dark); }
+.hero__stat-plus{ font-family:var(--font-display); font-size:2.2rem; font-weight:700; color:var(--gold-dark); }
+.hero__stat-label{ font-size:0.82rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.05em; margin-top:4px; }
+
+.hero__scroll{
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+  width:26px; height:42px; border:2px solid var(--dark); border-radius:20px; z-index:2;
+}
+.hero__scroll span{
+  position:absolute; top:8px; left:50%; transform:translateX(-50%);
+  width:4px; height:8px; border-radius:3px; background:var(--gold-dark);
+  animation:scrollDot 1.6s ease-in-out infinite;
+}
+@keyframes scrollDot{ 0%{ top:8px; opacity:1;} 70%{ opacity:0.3;} 100%{ top:22px; opacity:0;} }
+
+/* ===========================================
+   2. ПЕРЕВАГИ (Advantages)
+   Тут можна змінити: фон, колір тексту, іконки
+   =========================================== */
+.advantages{ background:var(--white); }
+.advantages__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+.advantage-card{
+  background:var(--beige); border-radius:var(--radius-md); padding:36px 28px;
+  transition:transform var(--transition), box-shadow var(--transition);
+}
+.advantage-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-soft); }
+.advantage-card__icon{
+  width:58px; height:58px; border-radius:50%; margin-bottom:20px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--dark); font-size:1.3rem;
+}
+.advantage-card h3{ font-size:1.15rem; margin-bottom:10px; }
+.advantage-card p{ color:var(--gray); font-size:0.94rem; }
+
+/* ===========================================
+   3. ПОСЛУГИ (Services)
+   Фото карток задаються градієнтами-заглушками нижче —
+   замініть на background-image: url('ваше-фото.jpg')
+   =========================================== */
+.services{ background:var(--beige); }
+.services__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+.service-card{
+  background:var(--white); border-radius:var(--radius-md); overflow:hidden;
+  box-shadow:var(--shadow-soft); transition:transform var(--transition);
+}
+.service-card:hover{ transform:translateY(-10px); }
+.service-card__img{ height:220px; background-size:cover; background-position:center; position:relative; }
+.service-card__img::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 60%, rgba(0,0,0,0.15)); }
+/* Заглушки-градієнти для фото послуг — замініть на реальні зображення */
+.service-card__img--1{ background:linear-gradient(135deg,#F3D9DA,#E4D4B0); }
+.service-card__img--2{ background:linear-gradient(135deg,#E4D4B0,#F7F3ED); }
+.service-card__img--3{ background:linear-gradient(135deg,#C7A86B,#F3D9DA); }
+.service-card__img--4{ background:linear-gradient(135deg,#1E1B18,#7A7570); }
+.service-card__img--5{ background:linear-gradient(135deg,#F3D9DA,#C7A86B); }
+.service-card__img--6{ background:linear-gradient(135deg,#F7F3ED,#E4D4B0); }
+.service-card__body{ padding:26px; }
+.service-card__body h3{ font-size:1.25rem; margin-bottom:8px; }
+.service-card__body p{ color:var(--gray); font-size:0.92rem; margin-bottom:18px; }
+.service-card__footer{ display:flex; align-items:center; justify-content:space-between; }
+.service-card__price{ font-weight:600; color:var(--gold-dark); }
+.service-card__link{ font-size:0.88rem; font-weight:600; display:flex; align-items:center; gap:6px; transition:gap var(--transition); }
+.service-card__link:hover{ gap:10px; color:var(--gold-dark); }
+
+/* ===========================================
+   4. ГАЛЕРЕЯ (Swiper slider)
+   Замініть градієнти .gallery__item--N на фото робіт
+   =========================================== */
+.gallery{ background:var(--white); padding-bottom:70px; }
+.gallery__slider{ padding:10px 0 40px; }
+.gallery__item{
+  height:420px; border-radius:var(--radius-lg); background-size:cover; background-position:center;
+}
+.gallery__item--1{ background:linear-gradient(135deg,#F3D9DA,#C7A86B); }
+.gallery__item--2{ background:linear-gradient(135deg,#E4D4B0,#1E1B18); }
+.gallery__item--3{ background:linear-gradient(135deg,#C7A86B,#F7F3ED); }
+.gallery__item--4{ background:linear-gradient(135deg,#F7F3ED,#F3D9DA); }
+.gallery__item--5{ background:linear-gradient(135deg,#1E1B18,#C7A86B); }
+.gallery__item--6{ background:linear-gradient(135deg,#F3D9DA,#E4D4B0); }
+.gallery .swiper-pagination-bullet-active{ background:var(--gold-dark); }
+.gallery__nav{ display:flex; justify-content:flex-end; gap:12px; margin-top:-10px; }
+.gallery__prev,.gallery__next{
+  width:48px; height:48px; border-radius:50%; border:1.5px solid var(--dark);
+  display:flex; align-items:center; justify-content:center; transition:var(--transition);
+}
+.gallery__prev:hover,.gallery__next:hover{ background:var(--dark); color:var(--white); }
+
+/* ===========================================
+   5. ДО / ПІСЛЯ (Before / After slider)
+   Замініть градієнти на реальні фото "до" і "після"
+   =========================================== */
+.ba-slider{
+  position:relative; max-width:820px; margin:0 auto; height:440px;
+  border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-soft);
+}
+.ba-slider__before,.ba-slider__after{ position:absolute; inset:0; }
+.ba-slider__before{ background:linear-gradient(135deg,#cfcac2,#a9a29a); } /* "до" — приглушені кольори */
+.ba-slider__after{ background:linear-gradient(135deg,#F3D9DA,#C7A86B); clip-path:inset(0 0 0 50%); } /* "після" — яскраві кольори */
+.ba-slider__label{
+  position:absolute; top:20px; padding:8px 18px; border-radius:100px;
+  background:rgba(255,255,255,0.85); font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+}
+.ba-slider__label--before{ left:20px; }
+.ba-slider__label--after{ right:20px; }
+.ba-slider__range{
+  position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0;
+}
+.ba-slider__handle{
+  position:absolute; top:50%; left:50%; width:50px; height:50px; border-radius:50%;
+  background:var(--white); display:flex; align-items:center; justify-content:center;
+  transform:translate(-50%,-50%); box-shadow:0 10px 30px rgba(0,0,0,0.25); pointer-events:none;
+  color:var(--gold-dark);
+}
+
+/* ===========================================
+   6. МАЙСТРИ (Masters)
+   Замініть градієнти .master-card__photo--N на реальні фото
+   =========================================== */
+.masters{ background:var(--pink); }
+.masters__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+.master-card{ text-align:center; }
+.master-card__photo{
+  width:100%; aspect-ratio:1/1.05; border-radius:var(--radius-lg); margin-bottom:18px;
+  background-size:cover; background-position:center;
+  box-shadow:var(--shadow-soft);
+}
+.master-card__photo--1{ background:linear-gradient(150deg,#E4D4B0,#C7A86B); }
+.master-card__photo--2{ background:linear-gradient(150deg,#F3D9DA,#E4D4B0); }
+.master-card__photo--3{ background:linear-gradient(150deg,#1E1B18,#7A7570); }
+.master-card__photo--4{ background:linear-gradient(150deg,#C7A86B,#F7F3ED); }
+.master-card h3{ font-size:1.1rem; margin-bottom:4px; }
+.master-card__spec{ font-size:0.88rem; color:var(--gold-dark); font-weight:600; margin-bottom:4px; }
+.master-card__exp{ font-size:0.85rem; color:var(--gray); }
+
+/* ===========================================
+   7. ВІДГУКИ (Reviews)
+   =========================================== */
+.reviews{ background:var(--white); }
+.review-card{
+  background:var(--beige); border-radius:var(--radius-md); padding:36px 32px; height:100%;
+  display:flex; flex-direction:column; gap:16px;
+}
+.review-card__stars{ color:var(--gold); letter-spacing:3px; font-size:1.1rem; }
+.review-card p{ color:var(--dark); font-size:0.98rem; flex:1; }
+.review-card__author{ display:flex; flex-direction:column; }
+.review-card__name{ font-weight:600; }
+.review-card__date{ font-size:0.8rem; color:var(--gray); }
+.reviews .swiper-pagination-bullet-active{ background:var(--gold-dark); }
+
+/* ===========================================
+   8. АКЦІЯ + ТАЙМЕР
+   Тут можна змінити: фон, колір тексту, анімацію
+   =========================================== */
+.promo{
+  background:linear-gradient(135deg,var(--dark) 0%, #2c2621 100%);
+  color:var(--white); padding:90px 0; position:relative; overflow:hidden;
+}
+.promo::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 85% 20%, rgba(199,168,107,0.25), transparent 55%);
+}
+.promo__inner{ position:relative; display:flex; align-items:center; justify-content:space-between; gap:50px; flex-wrap:wrap; }
+.promo__text{ max-width:480px; }
+.promo__text .eyebrow{ color:var(--gold-light); }
+.promo__text h2{ font-size:clamp(2rem,4vw,3rem); margin-bottom:16px; }
+.promo__desc{ color:rgba(255,255,255,0.7); margin-bottom:30px; }
+
+.promo__timer{ display:flex; gap:16px; }
+.promo__timer-block{
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px); border-radius:var(--radius-sm);
+  width:88px; padding:18px 0; text-align:center;
+}
+.promo__timer-block span{ display:block; font-family:var(--font-display); font-size:1.9rem; font-weight:700; color:var(--gold-light); }
+.promo__timer-block small{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.6); }
+
+/* ===========================================
+   9. ПРО САЛОН (About)
+   Тут вставляється фото інтер'єру — клас .about__img
+   =========================================== */
+.about{ background:var(--beige); }
+.about__inner{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:center; }
+.about__img{
+  aspect-ratio:4/5; border-radius:var(--radius-lg);
+  background:linear-gradient(150deg,#E4D4B0,#F3D9DA 60%,#C7A86B);
+  box-shadow:var(--shadow-soft);
+}
+.about__content p{ color:var(--gray); margin-bottom:18px; }
+.about__list{ margin-top:24px; display:flex; flex-direction:column; gap:12px; }
+.about__list li{ display:flex; align-items:center; gap:12px; font-weight:500; }
+.about__list i{ color:var(--gold-dark); }
+
+/* ===========================================
+   10. FAQ (Акордеон)
+   Логіка розкриття/згортання — script.js
+   =========================================== */
+.faq{ background:var(--white); }
+.accordion{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+.accordion__item{ background:var(--beige); border-radius:var(--radius-sm); overflow:hidden; }
+.accordion__header{
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  padding:22px 26px; font-weight:600; font-size:1rem; text-align:left;
+}
+.accordion__header i{ color:var(--gold-dark); transition:transform var(--transition); flex-shrink:0; margin-left:12px; }
+.accordion__item.is-open .accordion__header i{ transform:rotate(45deg); }
+.accordion__body{ max-height:0; overflow:hidden; transition:max-height var(--transition); }
+.accordion__body p{ padding:0 26px 22px; color:var(--gray); }
+
+/* ===========================================
+   11. ЗАПИС / КОНТАКТИ (Booking)
+   Тут форма запису та контактні дані
+   =========================================== */
+.booking{ background:var(--pink); }
+.booking__inner{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; }
+
+.booking__form-wrap{
+  background:var(--white); border-radius:var(--radius-lg); padding:44px;
+  box-shadow:var(--shadow-soft);
+}
+.booking__form{ margin-top:26px; display:flex; flex-direction:column; gap:18px; }
+.form__row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.form__field{ display:flex; flex-direction:column; gap:8px; }
+.form__field span{ font-size:0.82rem; font-weight:600; color:var(--gray); }
+.form__field input, .form__field select, .form__field textarea{
+  padding:14px 16px; border:1.5px solid rgba(30,27,24,0.12); border-radius:var(--radius-sm);
+  background:var(--beige); transition:border-color var(--transition), box-shadow var(--transition);
+}
+.form__field input:focus, .form__field select:focus, .form__field textarea:focus{
+  outline:none; border-color:var(--gold); box-shadow:0 0 0 4px rgba(199,168,107,0.15);
+}
+.form__note{ font-size:0.78rem; color:var(--gray); text-align:center; }
+
+.booking__contacts{ display:flex; flex-direction:column; gap:16px; }
+.contact-card{
+  display:flex; align-items:center; gap:16px; background:var(--white); border-radius:var(--radius-sm);
+  padding:18px 22px; box-shadow:var(--shadow-soft);
+}
+.contact-card i{ font-size:1.2rem; color:var(--gold-dark); width:26px; text-align:center; }
+.contact-card span{ display:block; font-size:0.78rem; color:var(--gray); }
+.contact-card a{ font-weight:600; }
+
+.map-embed{ border-radius:var(--radius-md); overflow:hidden; height:220px; box-shadow:var(--shadow-soft); }
+.map-embed iframe{ width:100%; height:100%; border:0; }
+
+/* ===========================================
+   12. FOOTER
+   =========================================== */
+.footer{ background:var(--dark); color:rgba(255,255,255,0.8); padding-top:70px; }
+.footer__inner{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px; padding-bottom:50px; }
+.logo--footer .logo__text{ color:var(--white); }
+.footer__col p{ margin-top:14px; font-size:0.92rem; color:rgba(255,255,255,0.55); max-width:280px; }
+.footer__col h4{ color:var(--white); margin-bottom:18px; font-size:1rem; }
+.footer__col a, .footer__col span{ display:block; margin-bottom:12px; font-size:0.92rem; color:rgba(255,255,255,0.7); }
+.footer__col a:hover{ color:var(--gold-light); }
+.footer__socials{ display:flex; gap:12px; margin-top:20px; }
+.footer__socials a{
+  width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.2);
+  display:flex; align-items:center; justify-content:center; transition:var(--transition);
+}
+.footer__socials a:hover{ background:var(--gold); color:var(--dark); border-color:var(--gold); }
+
+.footer__bottom{ border-top:1px solid rgba(255,255,255,0.1); padding:22px 0; }
+.footer__bottom-inner{ display:flex; justify-content:space-between; font-size:0.82rem; color:rgba(255,255,255,0.45); flex-wrap:wrap; gap:8px; }
+
+/* ===========================================
+   КНОПКА "НАГОРУ"
+   =========================================== */
+.to-top{
+  position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%;
+  background:var(--dark); color:var(--white); display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transform:translateY(10px); transition:var(--transition); z-index:300;
+}
+.to-top.is-visible{ opacity:1; visibility:visible; transform:translateY(0); }
+.to-top:hover{ background:var(--gold-dark); }
+
+/* ===========================================
+   АДАПТИВНІСТЬ (Responsive)
+   =========================================== */
+@media (max-width:1080px){
+  .advantages__grid{ grid-template-columns:repeat(2,1fr); }
+  .masters__grid{ grid-template-columns:repeat(2,1fr); }
+  .services__grid{ grid-template-columns:repeat(2,1fr); }
+  .about__inner{ grid-template-columns:1fr; }
+  .about__img{ aspect-ratio:16/9; }
+  .booking__inner{ grid-template-columns:1fr; }
+}
+
+@media (max-width:860px){
+  .nav, .header__actions{ display:none; }
+  .burger{ display:flex; }
+  .floating-cta{ display:flex; }
+  .hero{ padding-top:120px; }
+  .hero__stats{ gap:32px; }
+  .promo__inner{ justify-content:center; text-align:center; }
+  .promo__text{ margin:0 auto; }
+}
+
+@media (max-width:640px){
+  .section{ padding:76px 0; }
+  .advantages__grid, .services__grid, .masters__grid{ grid-template-columns:1fr; }
+  .form__row{ grid-template-columns:1fr; }
+  .footer__inner{ grid-template-columns:1fr; gap:34px; }
+  .gallery__item{ height:300px; }
+  .ba-slider{ height:320px; }
+  .promo__timer-block{ width:72px; padding:14px 0; }
+  .promo__timer{ gap:10px; }
+  .hero__title{ font-size:2.3rem; }
+}
